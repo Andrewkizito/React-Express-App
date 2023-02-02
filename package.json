@@ -1,0 +1,14 @@
+{
+  "name": "@monorepo-starter/root",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "start": "lerna run --parallel start"
+  },
+  "devDependencies": {
+    "lerna": "^6.4.1"
+  },
+  "workspaces": [
+    "app/*"
+  ]
+}
