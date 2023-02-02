@@ -1,4 +1,5 @@
 // Importing deps
+const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
 const express = require("express");
@@ -10,6 +11,9 @@ dotenv.config();
 
 // Initialize the express engine
 const app = express();
+
+//Setting cors
+app.use(cors());
 
 //Add middleware
 app.use(bodyParser.urlencoded({ extended: false }));

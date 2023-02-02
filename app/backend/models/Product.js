@@ -15,11 +15,15 @@ class Product {
     );
   };
 
+  static getProduct = (id) => {
+    return db.execute(`SELECT * FROM products WHERE id = ${id}`);
+  };
+
   static deleteProduct = (id) => {
     return db.execute(`DELETE FROM products WHERE id = ${id}`);
   };
 
-  static getProducts = (cb) => {
+  static fetchAll = (cb) => {
     db.execute(`SELECT * FROM products`)
       .then(([data]) => cb(null, data))
       .catch((err) => {

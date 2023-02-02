@@ -24,6 +24,14 @@ router.post("/products", ({ body }, res) => {
     .catch((err) => res.status(404).send(err));
 });
 
+router.get("/products/:id", ({ params }, res) => {
+  Product.getProduct(params.id)
+    .then(([data]) => {
+      res.status(200).send(data[0]);
+    })
+    .catch((err) => res.status(404).send(err));
+});
+
 router.delete("/products/:id", ({ params }, res) => {
   Product.deleteProduct(params.id)
     .then(() => res.status(200).send("Product Deleted Successfully"))
