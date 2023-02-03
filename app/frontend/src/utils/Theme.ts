@@ -4,7 +4,7 @@ import { blue } from "@mui/material/colors";
 const CustomTheme: Theme = createTheme({
   palette: {
     primary: {
-      main: blue[900],
+      main: blue[600],
     },
     secondary: {
       main: "#fff",
