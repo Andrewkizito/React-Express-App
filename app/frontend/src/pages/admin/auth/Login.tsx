@@ -31,9 +31,8 @@ const LoginPage = () => {
   };
 
   async function submit() {
-    console.log("Getting products");
-    const res = await api.get("/products");
-    console.log(res);
+    await api.get("/products");
+    // await api.post("/auth");
   }
 
   return (

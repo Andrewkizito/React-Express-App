@@ -5,6 +5,7 @@ const router = express.Router();
 
 //Get all products
 router.get("/products", (req, res) => {
+  console.log(req.session);
   ProductModel.find()
     .then((r) => res.status(200).send(r))
     .catch((e) => res.status(400).send(e.message));

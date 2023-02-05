@@ -1,17 +1,11 @@
 const { Schema, model } = require("mongoose");
 
-//Setting Up Types
-class Product {
-  constructor(title, description, details, price, imageUrl) {
-    this.title = title;
-    this.description = description;
-    this.details = details;
-    this.price = price;
-    this.imageUrl = imageUrl;
-  }
-}
-
 //Setting Up Schemas
+const UserSchema = new Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+});
+
 const ProductSchema = new Schema({
   title: { type: String, required: true },
   price: { type: Number, required: true },
@@ -21,6 +15,7 @@ const ProductSchema = new Schema({
 });
 
 //Setting Up Models
+const UserModel = model("users", UserSchema);
 const ProductModel = model("products", ProductSchema);
 
-module.exports = { Product, ProductModel };
+module.exports = { ProductModel, UserModel };
