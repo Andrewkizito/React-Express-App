@@ -3,9 +3,10 @@ const Product = require("../models/Product");
 
 const router = express.Router();
 
-// Handling '/' Request
-router.get("/products", (_, res) => {
-  Product.getProducts((err, data) => {
+// Handling Products Request
+router.get("/products", (req, res) => {
+  console.log(req.session.isloggedIn);
+  Product.fetchAll((err, data) => {
     if (err) res.status(400).send(err);
     else res.status(200).send(data);
   });

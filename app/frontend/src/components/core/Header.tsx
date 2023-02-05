@@ -1,4 +1,8 @@
-import * as React from "react";
+//Importing helper modules
+import routes from "../../utils/routes";
+import { AppRoute } from "../../utils/types";
+
+//Importing core modules
 import { styled, alpha } from "@mui/material/styles";
 import {
   AppBar,
@@ -9,11 +13,9 @@ import {
   Typography,
   Container,
   ListItemButton,
-  Button,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import routes from "../../utils/routes";
 import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -91,8 +93,8 @@ export default function Header() {
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
               <Box sx={{ display: "flex", gap: "1rem" }}>
-                {routes.map((item) => (
-                  <Link to={item.path}>
+                {routes.map((item: AppRoute, i) => (
+                  <Link to={item.path} key={i}>
                     <ListItemButton>
                       <Typography fontSize={"1rem"} variant="h5">
                         {item.title}

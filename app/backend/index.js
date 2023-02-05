@@ -4,22 +4,36 @@ const path = require("path");
 const dotenv = require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const mainRouter = require("./router/main");
+const authRouter = require("./router/auth");
 
 //Init env
 dotenv.config();
 
-// Initialize the express engine
+//Initialize app
 const app = express();
 
 //Setting cors
-app.use(cors());
+app.use(cors({ credentials: true, origin: "http://192.168.128.181:5173" }));
 
 //Add middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ strict: false, limit: 300 }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    secret: "my-secret-is-here",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600,
+    },
+  })
+);
 
+//Defining Routers
+app.use("/auth", authRouter);
 app.use("/", mainRouter);
 
 // Server setup

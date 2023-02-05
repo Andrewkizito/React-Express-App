@@ -1,3 +1,8 @@
+//Importing helper modules
+import { api, updateData } from "../../../utils/modules";
+import { useState } from "react";
+
+//Importing core modules
 import { Login } from "@mui/icons-material";
 import {
   Box,
@@ -8,9 +13,15 @@ import {
   Typography,
 } from "@mui/material";
 import { blue } from "@mui/material/colors";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState<{ username: string; password: string }>({
+    username: "",
+    password: "",
+  });
+
   const centerStyles: CSSObject = {
     display: "flex",
     flexDirection: "column",
@@ -18,6 +29,18 @@ const LoginPage = () => {
     justifyContent: "center",
     gap: "1rem",
   };
+
+  async function submit() {
+    // await api.post("/auth", {
+    //   ...form,
+    // });
+    console.log("Getting Products");
+    setTimeout(async () => {
+      const res = await api.get("/products");
+      console.log(document.cookie);
+      console.log(res);
+    }, 3000);
+  }
 
   return (
     <Box
@@ -40,8 +63,19 @@ const LoginPage = () => {
         <Typography fontWeight={600} fontSize={"1.2rem"} variant="h4">
           Sign In As Administrator.
         </Typography>
-        <TextField fullWidth label="Username" />
-        <TextField fullWidth label="Password" />
+        <TextField
+          fullWidth
+          label="Username"
+          value={form.username}
+          onChange={(e: any) => updateData("username", e.target.value, setForm)}
+        />
+        <TextField
+          fullWidth
+          label="Password"
+          value={form.password}
+          type="password"
+          onChange={(e: any) => updateData("password", e.target.value, setForm)}
+        />
         <Box
           sx={{
             ...centerStyles,
@@ -57,7 +91,7 @@ const LoginPage = () => {
             Not Admin, Leave Page
           </Link>
         </Box>
-        <Button endIcon={<Login />} fullWidth>
+        <Button onClick={submit} endIcon={<Login />} fullWidth>
           Login
         </Button>
       </Paper>

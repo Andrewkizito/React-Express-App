@@ -1,20 +1,10 @@
-import { Route } from "@mui/icons-material";
-import { ReactElement } from "react";
+import { AppRoute } from "./types";
 import Admin from "../pages/admin/Admin";
+import Dashboard from "../pages/admin/auth/Dashboard";
 import Login from "../pages/admin/auth/Login";
 import Products from "../pages/client/Products/Products";
 
-type Route = {
-  title: string;
-  path: string;
-  component: ReactElement;
-  nested?: {
-    path: string;
-    component: ReactElement;
-  }[];
-};
-
-const routes: Route[] = [
+const routes: AppRoute[] = [
   {
     title: "Products",
     path: "/",
@@ -38,6 +28,10 @@ const routes: Route[] = [
       {
         path: "login",
         component: <Login />,
+      },
+      {
+        path: "dashboard",
+        component: <Dashboard />,
       },
     ],
   },

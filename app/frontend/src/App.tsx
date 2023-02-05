@@ -1,3 +1,6 @@
+//Importing helper modules
+import { AppRoute } from "./utils/types";
+
 //Importing core components
 import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/core/Layout";
@@ -7,19 +10,20 @@ function App() {
   return (
     <>
       <Routes>
-        {routes.map((item) => {
+        {routes.map((item: AppRoute, i) => {
           if (!item.nested)
             return (
               <Route
+                key={i}
                 path={item.path}
                 element={<Layout>{item.component}</Layout>}
               />
             );
           else
             return (
-              <Route path={item.path} element={item.component}>
-                {item.nested.map((item) => (
-                  <Route path={item.path} element={item.component} />
+              <Route path={item.path} element={item.component} key={i}>
+                {item.nested.map((item: any, i) => (
+                  <Route key={i} path={item.path} element={item.component} />
                 ))}
               </Route>
             );
