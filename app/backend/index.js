@@ -34,7 +34,7 @@ const startServer = () => {
   //Connecting Database
   mongoose
     .connect(
-      `mongodb+srv://andrew:<password>@main-cluster.g7kqxgx.mongodb.net/?retryWrites=true&w=majority`
+      `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@main-cluster.g7kqxgx.mongodb.net/?retryWrites=true&w=majority`
     )
     .then(() => {
       //Add middleware
