@@ -1,14 +1,22 @@
-// Importing deps
+/* -------------------------------------------------------------------- */
+/* Importing all the dependencies that will be used in our application. */
+/* -------------------------------------------------------------------- */
+//Core deps
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
 const express = require("express");
 const bodyParser = require("body-parser");
+
+//Session Management Deps
+const mongoose = require("mongoose");
 const session = require("express-session");
+
+//Importing routers
 const mainRouter = require("./router/main");
 const authRouter = require("./router/auth");
 
-//Init env
+//Initializing env
 dotenv.config();
 
 //Initialize app
@@ -18,33 +26,45 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    allowedHeaders: ["content-type"],
     origin: "http://192.168.128.181:5173",
   })
 );
 
-//Add middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({ strict: false, limit: 300 }));
-app.use(express.static(path.join(__dirname, "public")));
-app.use(
-  session({
-    secret: "my-secret-is-here",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: new Date().getTime() + 3600 * 1000,
-    },
-  })
-);
+const startServer = () => {
+  //Connecting Database
+  mongoose
+    .connect(
+      `mongodb+srv://andrew:Kitab777!@main-cluster.g7kqxgx.mongodb.net/?retryWrites=true&w=majority`
+    )
+    .then(() => {
+      //Add middleware
+      app.use(bodyParser.urlencoded({ extended: false }));
+      app.use(bodyParser.json({ strict: false }));
+      app.use(express.static(path.join(__dirname, "public")));
+      app.use(
+        session({
+          secret: "meat-lovers-pizza",
+          resave: false,
+          saveUninitialized: false,
+          cookie: {
+            maxAge: new Date().getTime() + 3600 * 1000,
+          },
+        })
+      );
 
-console.log(new Date().getTime() + 3600 * 1000);
+      //Defining Routers
+      app.use("/auth", authRouter);
+      app.use("/", mainRouter);
 
-//Defining Routers
-app.use("/auth", authRouter);
-app.use("/", mainRouter);
+      // Server setup
+      app.listen(8000, () => {
+        console.log(`Server Listening on port - ${8000}`);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      process.exit(1);
+    });
+};
 
-// Server setup
-app.listen(process.env.PORT, () => {
-  console.log(`Server Listening on port - ${process.env.PORT}`);
-});
+startServer();

@@ -1,42 +1,29 @@
 const express = require("express");
-const Product = require("../models/Product");
+const { ProductModel } = require("../models/models");
 
 const router = express.Router();
 
-// Handling Products Request
+//Get all products
 router.get("/products", (req, res) => {
-  console.log(req.session.isloggedIn);
-  Product.fetchAll((err, data) => {
-    if (err) res.status(400).send(err);
-    else res.status(200).send(data);
-  });
+  ProductModel.find()
+    .then((r) => res.status(200).send(r))
+    .catch((e) => res.status(400).send(e.message));
 });
 
-router.post("/products", ({ body }, res) => {
-  const product = new Product(
-    body.title,
-    body.description,
-    body.price,
-    body.imageUrl
-  );
-  product
+//Save products
+router.post("/products", (req, res) => {
+  const { title, description, details, price, imageUrl } = req.body;
+  const item = new ProductModel({
+    title: title,
+    description: description,
+    details: details,
+    price: price,
+    imageUrl: imageUrl,
+  });
+  item
     .save()
     .then(() => res.status(200).send("Product Saved Successfully"))
-    .catch((err) => res.status(404).send(err));
-});
-
-router.get("/products/:id", ({ params }, res) => {
-  Product.getProduct(params.id)
-    .then(([data]) => {
-      res.status(200).send(data[0]);
-    })
-    .catch((err) => res.status(404).send(err));
-});
-
-router.delete("/products/:id", ({ params }, res) => {
-  Product.deleteProduct(params.id)
-    .then(() => res.status(200).send("Product Deleted Successfully"))
-    .catch((err) => res.status(404).send(err));
+    .catch((err) => res.status(400).send(err.message));
 });
 
 module.exports = router;

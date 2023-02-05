@@ -4,10 +4,7 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   req.session.loggedIn = true;
-  setTimeout(() => {
-    console.log(req.session);
-    res.status(200).send("Done");
-  }, 2000);
+  res.status(200).send("Done");
 });
 
 module.exports = router;

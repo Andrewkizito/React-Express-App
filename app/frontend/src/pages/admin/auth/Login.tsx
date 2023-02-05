@@ -31,15 +31,9 @@ const LoginPage = () => {
   };
 
   async function submit() {
-    // await api.post("/auth", {
-    //   ...form,
-    // });
-    console.log("Getting Products");
-    setTimeout(async () => {
-      const res = await api.get("/products");
-      console.log(document.cookie);
-      console.log(res);
-    }, 3000);
+    console.log("Getting products");
+    const res = await api.get("/products");
+    console.log(res);
   }
 
   return (
