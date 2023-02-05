@@ -15,7 +15,13 @@ dotenv.config();
 const app = express();
 
 //Setting cors
-app.use(cors({ credentials: true, origin: "http://192.168.128.181:5173" }));
+app.use(
+  cors({
+    credentials: true,
+    allowedHeaders: ["content-type"],
+    origin: "http://192.168.128.181:5173",
+  })
+);
 
 //Add middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,10 +33,12 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 3600,
+      maxAge: new Date().getTime() + 3600 * 1000,
     },
   })
 );
+
+console.log(new Date().getTime() + 3600 * 1000);
 
 //Defining Routers
 app.use("/auth", authRouter);
