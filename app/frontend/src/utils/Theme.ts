@@ -23,8 +23,18 @@ const CustomTheme: Theme = createTheme({
         variant: "contained",
         sx: {
           textTransform: "capitalize",
-          minWidth: 180,
+          minWidth: 130,
         },
+      },
+    },
+    MuiAccordion: {
+      defaultProps: {
+        variant: "outlined",
+      },
+    },
+    MuiPaper: {
+      defaultProps: {
+        variant: "outlined",
       },
     },
   },

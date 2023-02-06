@@ -1,8 +1,9 @@
 import { AppRoute } from "./types";
 import Admin from "../pages/admin/Admin";
-import Dashboard from "../pages/admin/auth/Dashboard";
+import Dashboard from "../pages/admin/Dashboard/Dashboard";
 import Login from "../pages/admin/auth/Login";
 import Products from "../pages/client/Products/Products";
+import ProductsManager from "../pages/admin/Products/Products";
 
 const routes: AppRoute[] = [
   {
@@ -26,12 +27,16 @@ const routes: AppRoute[] = [
     path: "/admin",
     nested: [
       {
-        path: "login",
+        path: "",
         component: <Login />,
       },
       {
         path: "dashboard",
         component: <Dashboard />,
+      },
+      {
+        path: "products",
+        component: <ProductsManager />,
       },
     ],
   },

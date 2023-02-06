@@ -31,8 +31,7 @@ const LoginPage = () => {
   };
 
   async function submit() {
-    await api.get("/products");
-    // await api.post("/auth");
+    navigate("/admin/dashboard");
   }
 
   return (

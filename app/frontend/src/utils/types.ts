@@ -9,3 +9,10 @@ export type AppRoute = {
     component: ReactElement;
   }[];
 };
+export type Product = {
+  title: string;
+  description: string;
+  details: string;
+  price: number;
+  imageUrl: string;
+};
