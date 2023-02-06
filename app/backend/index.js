@@ -12,6 +12,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const UserDetails = require("./models/auth");
 const sessionStore = require("connect-mongodb-session")(session);
 
 //Importing routers
@@ -69,6 +70,9 @@ const startServer = () => {
       //Set up passport
       app.use(passport.initialize());
       app.use(passport.session());
+      passport.use(UserDetails.createStrategy());
+      passport.serializeUser(UserDetails.serializeUser());
+      passport.deserializeUser(UserDetails.deserializeUser());
 
       //Defining Routers
       app.use("/auth", authRouter);
