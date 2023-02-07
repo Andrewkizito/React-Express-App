@@ -1,6 +1,7 @@
 import {
   List,
   ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   ListSubheader,
@@ -17,34 +18,34 @@ export default function Sidebar() {
     <List
       sx={{
         width: 300,
-        bgcolor: "background.paper",
+        bgcolor: "#0b132b",
         height: "100vh",
       }}
-      subheader={<ListSubheader>Admin Panel</ListSubheader>}
+      subheader={<ListSubheader sx={{color: "#fff",bgcolor: "#0b132b"}}>Admin Panel</ListSubheader>}
     >
       <Link to="/admin/dashboard">
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon>
-            <InsightsOutlined />
+            <InsightsOutlined htmlColor="#94a9b1"/>
           </ListItemIcon>
-          <ListItemText primary="Dashboard" />
-        </ListItem>
+          <ListItemText primary="Dashboard" primaryTypographyProps={{color: "#94a9b1",fontWeight: 300,fontSize: "0.9rem"}}/>
+        </ListItemButton>
       </Link>
       <Link to="/admin/products">
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon>
-            <ShoppingCartOutlined />
+            <ShoppingCartOutlined htmlColor="#94a9b1"/>
           </ListItemIcon>
-          <ListItemText primary="Products" />
-        </ListItem>
+          <ListItemText primary="Products" primaryTypographyProps={{color: "#94a9b1",fontWeight: 300,fontSize: "0.9rem"}}/>
+        </ListItemButton>
       </Link>
       <Link to="/admin/orders">
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon>
-            <TaskOutlined />
+            <TaskOutlined htmlColor="#94a9b1"/>
           </ListItemIcon>
-          <ListItemText primary="Orders" />
-        </ListItem>
+          <ListItemText primary="Orders" primaryTypographyProps={{color: "#94a9b1",fontWeight: 300,fontSize: "0.9rem"}}/>
+        </ListItemButton>
       </Link>
     </List>
   );

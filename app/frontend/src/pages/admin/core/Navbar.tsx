@@ -161,7 +161,7 @@ export default function Navbar() {
         width: "calc(100vw - 300px)",
         position: "absolute",
         right: 0,
-        bgcolor: "#fff",
+        bgcolor: "#0b132b",
       }}
     >
       <AppBar position="static" color="transparent">
@@ -173,12 +173,13 @@ export default function Navbar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <MenuIcon htmlColor="#94a9b1"/>
           </IconButton>
           <Typography
             variant="h6"
             noWrap
             component="div"
+            color="#94a9b1"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             MUI
@@ -200,7 +201,7 @@ export default function Navbar() {
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
-                <MailIcon />
+                <MailIcon htmlColor="#94a9b1"/>
               </Badge>
             </IconButton>
             <IconButton
@@ -209,7 +210,7 @@ export default function Navbar() {
               color="inherit"
             >
               <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+                <NotificationsIcon htmlColor="#94a9b1"/>
               </Badge>
             </IconButton>
             <IconButton
@@ -221,7 +222,7 @@ export default function Navbar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle htmlColor="#94a9b1"/>
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -233,7 +234,7 @@ export default function Navbar() {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+              <MoreIcon htmlColor="#94a9b1"/>
             </IconButton>
           </Box>
         </Toolbar>

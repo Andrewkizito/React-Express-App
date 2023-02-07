@@ -29,7 +29,7 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: "http://192.168.128.181:5173",
+    origin: "http://localhost:5173",
   })
 );
 

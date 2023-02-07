@@ -12,8 +12,6 @@ const Products = () => {
     api.get("/products").then((res) => setData(res.data));
   }, []);
 
-  console.log(data);
-
   return (
     <Container maxWidth="lg">
       <Box p="3rem 0.4rem">

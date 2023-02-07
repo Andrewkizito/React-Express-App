@@ -5,6 +5,15 @@ export const api = axios.create({
   withCredentials: true,
 });
 
+export const partitionData = (data: any[], size: number) => {
+  const initialData = [...data]
+  const result: any[] = []
+  while (initialData.length !== 0) {
+    result.push(initialData.splice(0, size))
+  }
+  return result
+}
+
 export const updateData = (
   field: string,
   value: string,

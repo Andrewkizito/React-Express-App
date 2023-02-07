@@ -10,7 +10,7 @@ const Layout = (props: { children: ReactElement }) => {
       height={"100vh"}
       width={"100vw"}
       position="relative"
-      bgcolor={"#e9e9e9"}
+      bgcolor={"#121a35"}
     >
       <Navbar />
       <Sidebar />
