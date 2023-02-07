@@ -31,7 +31,8 @@ const LoginPage = () => {
   };
 
   async function submit() {
-    navigate("/admin/dashboard");
+    const res = await api.post("/auth/register", { email: "AndrewKizito54@gmail.com", password: "Kitab777!"});
+    console.log(res)
   }
 
   return (
