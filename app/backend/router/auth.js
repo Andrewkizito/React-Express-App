@@ -1,19 +1,19 @@
+//Importing modules
 const express = require("express");
 const authController = require("../controllers/auth");
-const { UserModel } = require("../models/models");
 
+//Create Router
 const router = express.Router();
 
 router.post("/login", authController.login, (req, res) => {
-  res.status(200).send(req.token);
+  if (req.token) res.status(200).send({ authToken: req.token });
+  else res.status(200).json({ error: req.error });
 });
 
 router.post("/register", authController.register, (req, res) => {
-  if (req.error === undefined) {
+  if (req.error === undefined)
     res.status(200).send("User Created Successfully");
-  } else {
-    res.status(400).send(req.error);
-  }
+  else res.status(200).json({ error: req.error });
 });
 
 module.exports = router;

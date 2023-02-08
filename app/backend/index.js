@@ -22,14 +22,7 @@ dotenv.config();
 const app = express();
 
 //Setting cors
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://main.diorsljjalcyq.amplifyapp.com",
-    ],
-  })
-);
+app.use(cors());
 
 //DB Connection String
 const mongoUri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@main-cluster.g7kqxgx.mongodb.net/?retryWrites=true&w=majority`;

@@ -3,14 +3,33 @@ const bcrypt = require("bcrypt");
 const { UserModel } = require("../models/models");
 
 exports.login = (req, res, next) => {
-  req.token = jwt.sign(
-    {
-      ...req.headers,
-    },
-    process.env.APP_SECRET,
-    { expiresIn: 60 * 60 }
-  );
-  next();
+  console.log(req.body);
+  UserModel.find({ username: req.body.username })
+    .then((user) => {
+      console.log(user[0]);
+      if (user[0] !== undefined) {
+        if (bcrypt.compareSync(req.body.password, user[0].password)) {
+          req.token = jwt.sign(
+            {
+              username: user[0].username.split("#")[0],
+            },
+            process.env.APP_SECRET,
+            { expiresIn: 60 * 60 }
+          );
+          next();
+        } else {
+          req.error = "Password Is Invalid.";
+          next();
+        }
+      } else {
+        req.error = "Account Not Found.";
+        next();
+      }
+    })
+    .catch((err) => {
+      req.error = err.message;
+      next();
+    });
 };
 
 exports.register = async (req, res, next) => {
@@ -18,8 +37,9 @@ exports.register = async (req, res, next) => {
   //Checking to see if user exists
   UserModel.find({ username: email })
     .then(async (user) => {
-      if (user[0] !== undefined) {
+      if (user[0].username) {
         req.error = "Email Exists Already";
+        next();
       } else {
         //Hashing password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,10 +53,11 @@ exports.register = async (req, res, next) => {
         } catch (error) {
           req.error = error.message;
         }
+        next();
       }
     })
     .catch((err) => {
       req.error = err.message;
+      next();
     });
-  next();
 };

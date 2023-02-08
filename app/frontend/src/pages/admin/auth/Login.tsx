@@ -31,8 +31,11 @@ const LoginPage = () => {
   };
 
   async function submit() {
-    const res = await api.post("/auth/register", { email: "AndrewKizito54@gmail.com", password: "Kitab777!"});
-    console.log(res)
+    const res = await api.post("/auth/login", {
+      email: "AndrewKizito54@gmail.com",
+      password: "Kitab777!",
+    });
+    console.log(res.data);
   }
 
   return (
